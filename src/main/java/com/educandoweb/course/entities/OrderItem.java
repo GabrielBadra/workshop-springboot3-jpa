@@ -68,8 +68,8 @@ public class OrderItem implements Serializable{
 		OrderItem other = (OrderItem) obj;
 		return Objects.equals(id, other.id);
 	}
-	public double subTotal() {
-		return getQuantity() * getPrice();
+	public double getSubTotal() {
+		return price * quantity;
 	}
 	
 }
