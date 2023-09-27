@@ -13,23 +13,35 @@ import com.educandoweb.course.repositories.UserRepository;
 public class UserService {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepository entityRepository;
 	
 	public List<User> findAll() {
-		return userRepository.findAll();
+		return entityRepository.findAll();
 	}
 	
 	public User findById(Long id) {
-		Optional<User> user = userRepository.findById(id);
-		return user.get();
+		Optional<User> entity = entityRepository.findById(id);
+		return entity.get();
 	}
 	
-	public User insert(User user) {
-		return userRepository.save(user);
+	public User insert(User entity) {
+		return entityRepository.save(entity);
 	}
 	
 	public void delete(Long id) {
-		userRepository.deleteById(id);
+		entityRepository.deleteById(id);
 	}
 	
+	//ESSE ID É O ID DO OBJETO USER QUE QUER ATUALIZAR
+	public User uptade(Long id, User entity) {
+		User entity = entityRepository.getReferenceById(id);
+		uptadeData(entity, entity);
+		return entityRepository.save(entity);
+	}
+	
+	private void uptadeData(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+	}
 }
